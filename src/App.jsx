@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import Login from './components/Login'
+import LandingPage from './components/LandingPage'
 import TeacherDash from './components/TeacherDash'
 import StudentDash from './components/StudentDash'
-import AdminDash from './components/AdminDash' // Ensure you create this file next
+import AdminDash from './components/AdminDash'
 
 function App() {
-  const [view, setView] = useState('login');
+  const [view, setView] = useState('landing');
   const [user, setUser] = useState(null);
 
   const handleLogin = (userData, role) => {
@@ -23,17 +24,26 @@ function App() {
 
   const handleSignOut = () => {
     setUser(null);
+    setView('landing');
+  };
+
+  const handleGetStarted = () => {
     setView('login');
   };
 
   return (
     <div className="min-h-screen bg-slate-50">
+      {/* Landing Page */}
+      {view === 'landing' && (
+        <LandingPage onGetStarted={handleGetStarted} />
+      )}
+
       {/* Login Screen */}
       {view === 'login' && (
         <Login onLogin={handleLogin} />
       )}
 
-      {/* Admin Dashboard: To manage Teachers */}
+      {/* Admin Dashboard: To manage Teachers & System */}
       {view === 'admin' && (
         <AdminDash user={user} onSignOut={handleSignOut} />
       )}
@@ -48,7 +58,7 @@ function App() {
         <StudentDash user={user} onSignOut={handleSignOut} />
       )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

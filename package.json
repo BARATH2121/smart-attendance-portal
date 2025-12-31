@@ -32,4 +32,12 @@
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4"
   }
+  {
+  "homepage": "https://barath2121.github.io/smart-attendance-portal/",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  }
+}
+
 }
